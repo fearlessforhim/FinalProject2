@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		ABCE66A016767A08002AFD7B /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = ABCE669F16767A08002AFD7B /* main.c */; };
 		ABCE66A216767A08002AFD7B /* FinalProject2.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = ABCE66A116767A08002AFD7B /* FinalProject2.1 */; };
 		ABCE66B016767A5D002AFD7B /* camera.c in Sources */ = {isa = PBXBuildFile; fileRef = ABCE66A816767A5D002AFD7B /* camera.c */; };
 		ABCE66B116767A5D002AFD7B /* geom.c in Sources */ = {isa = PBXBuildFile; fileRef = ABCE66AA16767A5D002AFD7B /* geom.c */; };
 		ABCE66B216767A5D002AFD7B /* precision.c in Sources */ = {isa = PBXBuildFile; fileRef = ABCE66AC16767A5D002AFD7B /* precision.c */; };
 		ABCE66B316767A5D002AFD7B /* trace.c in Sources */ = {isa = PBXBuildFile; fileRef = ABCE66AE16767A5D002AFD7B /* trace.c */; };
+		ABCE66B516767B03002AFD7B /* project2.c in Sources */ = {isa = PBXBuildFile; fileRef = ABCE66B416767B03002AFD7B /* project2.c */; };
+		ABCE66B816767B26002AFD7B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABCE66B616767B26002AFD7B /* GLUT.framework */; };
+		ABCE66B916767B26002AFD7B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABCE66B716767B26002AFD7B /* OpenGL.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,7 +32,6 @@
 
 /* Begin PBXFileReference section */
 		ABCE669B16767A08002AFD7B /* FinalProject2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FinalProject2; sourceTree = BUILT_PRODUCTS_DIR; };
-		ABCE669F16767A08002AFD7B /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		ABCE66A116767A08002AFD7B /* FinalProject2.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = FinalProject2.1; sourceTree = "<group>"; };
 		ABCE66A816767A5D002AFD7B /* camera.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = camera.c; sourceTree = "<group>"; };
 		ABCE66A916767A5D002AFD7B /* camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
@@ -40,6 +41,9 @@
 		ABCE66AD16767A5D002AFD7B /* precision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = precision.h; sourceTree = "<group>"; };
 		ABCE66AE16767A5D002AFD7B /* trace.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = trace.c; sourceTree = "<group>"; };
 		ABCE66AF16767A5D002AFD7B /* trace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = trace.h; sourceTree = "<group>"; };
+		ABCE66B416767B03002AFD7B /* project2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = project2.c; sourceTree = "<group>"; };
+		ABCE66B616767B26002AFD7B /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		ABCE66B716767B26002AFD7B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +51,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABCE66B816767B26002AFD7B /* GLUT.framework in Frameworks */,
+				ABCE66B916767B26002AFD7B /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +62,8 @@
 		ABCE669016767A08002AFD7B = {
 			isa = PBXGroup;
 			children = (
+				ABCE66B616767B26002AFD7B /* GLUT.framework */,
+				ABCE66B716767B26002AFD7B /* OpenGL.framework */,
 				ABCE669E16767A08002AFD7B /* FinalProject2 */,
 				ABCE669C16767A08002AFD7B /* Products */,
 			);
@@ -72,6 +80,7 @@
 		ABCE669E16767A08002AFD7B /* FinalProject2 */ = {
 			isa = PBXGroup;
 			children = (
+				ABCE66B416767B03002AFD7B /* project2.c */,
 				ABCE66A816767A5D002AFD7B /* camera.c */,
 				ABCE66A916767A5D002AFD7B /* camera.h */,
 				ABCE66AA16767A5D002AFD7B /* geom.c */,
@@ -80,7 +89,6 @@
 				ABCE66AD16767A5D002AFD7B /* precision.h */,
 				ABCE66AE16767A5D002AFD7B /* trace.c */,
 				ABCE66AF16767A5D002AFD7B /* trace.h */,
-				ABCE669F16767A08002AFD7B /* main.c */,
 				ABCE66A116767A08002AFD7B /* FinalProject2.1 */,
 			);
 			path = FinalProject2;
@@ -137,11 +145,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABCE66A016767A08002AFD7B /* main.c in Sources */,
 				ABCE66B016767A5D002AFD7B /* camera.c in Sources */,
 				ABCE66B116767A5D002AFD7B /* geom.c in Sources */,
 				ABCE66B216767A5D002AFD7B /* precision.c in Sources */,
 				ABCE66B316767A5D002AFD7B /* trace.c in Sources */,
+				ABCE66B516767B03002AFD7B /* project2.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
