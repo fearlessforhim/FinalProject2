@@ -31,8 +31,8 @@
 #define KEY_TRANS_X 'd'
 #define KEY_TRANS_y '-'
 #define KEY_TRANS_Y '+'
-#define KEY_TRANS_z 's'
-#define KEY_TRANS_Z 'w'
+#define KEY_TRANS_z 'w'
+#define KEY_TRANS_Z 's'
 #define KEY_ROT_x 'k'
 #define KEY_ROT_X 'i'
 #define KEY_ROT_y 'j'
@@ -67,8 +67,8 @@ static char camera_help[] = \
 "\n"\
 ;
 
-static Real eye[] = {0, 5, 10};
-static Real cen[] = {0, 0, 0};
+static Real eye[] = {2.0, 1.0, 0.0};
+static Real cen[] = {0, 0, 5.0};
 static Real up[] = {0, 1, 0};
 
 // keyboard

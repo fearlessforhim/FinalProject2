@@ -20,19 +20,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "FinalProject2/project2.c"
-         timestampString = "376867819.874253"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "59"
-         endingLineNumber = "59"
-         landmarkName = "keyboard()"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "FinalProject2/camera.c"
          timestampString = "376865562.289627"
          startingColumnNumber = "9223372036854775807"
@@ -53,19 +40,6 @@
          startingLineNumber = "144"
          endingLineNumber = "144"
          landmarkName = "camera_translate()"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "FinalProject2/project2.c"
-         timestampString = "376867819.874253"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "183"
-         endingLineNumber = "183"
-         landmarkName = "init()"
          landmarkType = "7">
       </FileBreakpoint>
    </FileBreakpoints>
