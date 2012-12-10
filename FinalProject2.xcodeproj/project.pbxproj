@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		ABCE66A016767A08002AFD7B /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = ABCE669F16767A08002AFD7B /* main.c */; };
 		ABCE66A216767A08002AFD7B /* FinalProject2.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = ABCE66A116767A08002AFD7B /* FinalProject2.1 */; };
+		ABCE66B016767A5D002AFD7B /* camera.c in Sources */ = {isa = PBXBuildFile; fileRef = ABCE66A816767A5D002AFD7B /* camera.c */; };
+		ABCE66B116767A5D002AFD7B /* geom.c in Sources */ = {isa = PBXBuildFile; fileRef = ABCE66AA16767A5D002AFD7B /* geom.c */; };
+		ABCE66B216767A5D002AFD7B /* precision.c in Sources */ = {isa = PBXBuildFile; fileRef = ABCE66AC16767A5D002AFD7B /* precision.c */; };
+		ABCE66B316767A5D002AFD7B /* trace.c in Sources */ = {isa = PBXBuildFile; fileRef = ABCE66AE16767A5D002AFD7B /* trace.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +32,14 @@
 		ABCE669B16767A08002AFD7B /* FinalProject2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FinalProject2; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABCE669F16767A08002AFD7B /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		ABCE66A116767A08002AFD7B /* FinalProject2.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = FinalProject2.1; sourceTree = "<group>"; };
+		ABCE66A816767A5D002AFD7B /* camera.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = camera.c; sourceTree = "<group>"; };
+		ABCE66A916767A5D002AFD7B /* camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
+		ABCE66AA16767A5D002AFD7B /* geom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = geom.c; sourceTree = "<group>"; };
+		ABCE66AB16767A5D002AFD7B /* geom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = geom.h; sourceTree = "<group>"; };
+		ABCE66AC16767A5D002AFD7B /* precision.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = precision.c; sourceTree = "<group>"; };
+		ABCE66AD16767A5D002AFD7B /* precision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = precision.h; sourceTree = "<group>"; };
+		ABCE66AE16767A5D002AFD7B /* trace.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = trace.c; sourceTree = "<group>"; };
+		ABCE66AF16767A5D002AFD7B /* trace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = trace.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +72,14 @@
 		ABCE669E16767A08002AFD7B /* FinalProject2 */ = {
 			isa = PBXGroup;
 			children = (
+				ABCE66A816767A5D002AFD7B /* camera.c */,
+				ABCE66A916767A5D002AFD7B /* camera.h */,
+				ABCE66AA16767A5D002AFD7B /* geom.c */,
+				ABCE66AB16767A5D002AFD7B /* geom.h */,
+				ABCE66AC16767A5D002AFD7B /* precision.c */,
+				ABCE66AD16767A5D002AFD7B /* precision.h */,
+				ABCE66AE16767A5D002AFD7B /* trace.c */,
+				ABCE66AF16767A5D002AFD7B /* trace.h */,
 				ABCE669F16767A08002AFD7B /* main.c */,
 				ABCE66A116767A08002AFD7B /* FinalProject2.1 */,
 			);
@@ -118,6 +138,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABCE66A016767A08002AFD7B /* main.c in Sources */,
+				ABCE66B016767A5D002AFD7B /* camera.c in Sources */,
+				ABCE66B116767A5D002AFD7B /* geom.c in Sources */,
+				ABCE66B216767A5D002AFD7B /* precision.c in Sources */,
+				ABCE66B316767A5D002AFD7B /* trace.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
