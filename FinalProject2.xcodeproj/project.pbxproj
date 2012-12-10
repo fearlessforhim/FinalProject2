@@ -15,6 +15,7 @@
 		ABCE66B516767B03002AFD7B /* project2.c in Sources */ = {isa = PBXBuildFile; fileRef = ABCE66B416767B03002AFD7B /* project2.c */; };
 		ABCE66B816767B26002AFD7B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABCE66B616767B26002AFD7B /* GLUT.framework */; };
 		ABCE66B916767B26002AFD7B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABCE66B716767B26002AFD7B /* OpenGL.framework */; };
+		ABCE66C1167684F9002AFD7B /* objectLoader.c in Sources */ = {isa = PBXBuildFile; fileRef = ABCE66C0167684F8002AFD7B /* objectLoader.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,6 +45,9 @@
 		ABCE66B416767B03002AFD7B /* project2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = project2.c; sourceTree = "<group>"; };
 		ABCE66B616767B26002AFD7B /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		ABCE66B716767B26002AFD7B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		ABCE66C0167684F8002AFD7B /* objectLoader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = objectLoader.c; sourceTree = "<group>"; };
+		ABCE66C81676884F002AFD7B /* box.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = box.obj; path = ../box.obj; sourceTree = "<group>"; };
+		ABCE66CF167688BB002AFD7B /* box.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = box.obj; path = FinalProject2/box.obj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +66,7 @@
 		ABCE669016767A08002AFD7B = {
 			isa = PBXGroup;
 			children = (
+				ABCE66CF167688BB002AFD7B /* box.obj */,
 				ABCE66B616767B26002AFD7B /* GLUT.framework */,
 				ABCE66B716767B26002AFD7B /* OpenGL.framework */,
 				ABCE669E16767A08002AFD7B /* FinalProject2 */,
@@ -80,7 +85,9 @@
 		ABCE669E16767A08002AFD7B /* FinalProject2 */ = {
 			isa = PBXGroup;
 			children = (
+				ABCE66C81676884F002AFD7B /* box.obj */,
 				ABCE66B416767B03002AFD7B /* project2.c */,
+				ABCE66C0167684F8002AFD7B /* objectLoader.c */,
 				ABCE66A816767A5D002AFD7B /* camera.c */,
 				ABCE66A916767A5D002AFD7B /* camera.h */,
 				ABCE66AA16767A5D002AFD7B /* geom.c */,
@@ -150,6 +157,7 @@
 				ABCE66B216767A5D002AFD7B /* precision.c in Sources */,
 				ABCE66B316767A5D002AFD7B /* trace.c in Sources */,
 				ABCE66B516767B03002AFD7B /* project2.c in Sources */,
+				ABCE66C1167684F9002AFD7B /* objectLoader.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

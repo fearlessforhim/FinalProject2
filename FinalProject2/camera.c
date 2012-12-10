@@ -379,6 +379,7 @@ void camera_tick() {
 }
 
 void camera_lookat() {
+    printf("Eye at: %f %f %f\n", eye[0], eye[1], eye[2]);
 	gluLookAt(
               eye[0], eye[1], eye[2],
               cen[0], cen[1], cen[2],
