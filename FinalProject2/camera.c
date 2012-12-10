@@ -30,7 +30,7 @@
 #define KEY_TRANS_x 'a'
 #define KEY_TRANS_X 'd'
 #define KEY_TRANS_y '-'
-#define KEY_TRANS_Y '+'
+#define KEY_TRANS_Y '='
 #define KEY_TRANS_z 'w'
 #define KEY_TRANS_Z 's'
 #define KEY_ROT_x 'k'
@@ -67,8 +67,8 @@ static char camera_help[] = \
 "\n"\
 ;
 
-static Real eye[] = {2.0, 1.0, 0.0};
-static Real cen[] = {0, 0, 5.0};
+static Real eye[] = {0.0, 2.0, -10.0};
+static Real cen[] = {0, 0, 0.0};
 static Real up[] = {0, 1, 0};
 
 // keyboard
@@ -80,10 +80,6 @@ static Real key_rot_rate = 5.0;
 //static int mouse_right_button = MOUSE_BUTTON_UP;
 static int prev_motion_x = -1;
 static int prev_motion_y = -1;
-static Real mouse_trans_rate = 0.05;
-static Real mouse_rot_rate = 0.5;
-static int shift_key_down = 0;
-static int ctrl_key_down = 0;
 
 // joystick
 static Real joy_trans[3] = {0, 0, 0};
