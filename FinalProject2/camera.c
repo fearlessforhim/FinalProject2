@@ -67,7 +67,7 @@ static char camera_help[] = \
 "\n"\
 ;
 
-static Real eye[] = {0.0, 2.0, -10.0};
+static Real eye[] = {0.0, 2.0, 25.0};
 static Real cen[] = {0, 0, 0.0};
 static Real up[] = {0, 1, 0};
 
@@ -201,6 +201,12 @@ void camera_get(Real* eye_ret, Real* cen_ret, Real* up_ret) {
 	geom_vector3_copy(cen, cen_ret);
 	geom_vector3_copy(up, up_ret);
 }
+
+//static void camera_get_pos(Real *camPos){
+//    camPos[0] = eye[0];
+//    camPos[1] = eye[1];
+//    camPos[2] = eye[2];
+//}
 
 static void print_camera_info() {
 	camera_get(eye, cen, up);
@@ -375,7 +381,7 @@ void camera_tick() {
 }
 
 void camera_lookat() {
-    printf("Eye at: %f %f %f\n", eye[0], eye[1], eye[2]);
+//    printf("Eye at: %f %f %f\n", eye[0], eye[1], eye[2]);
 	gluLookAt(
               eye[0], eye[1], eye[2],
               cen[0], cen[1], cen[2],

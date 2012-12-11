@@ -11,20 +11,21 @@
 #include <stdarg.h>
 #include <string.h>
 #include <sys/time.h>
-
+#include <math.h>
 #include <GLUT/glut.h>
 #include <OpenGL/OpenGL.h>
 
 #include "precision.h"
 #include "geom.h"
 #include "camera.h"
+#include "grid_terrain.h"
 
 //#include "mvm.h"
 
 #define FPS 60
 #define KEY_ESC 27
 #define KEY_RESET_TRANSFORM 'r'
-#define KEY_TOGGLE_LOCAL_TRANSFORM ' '
+#define KEY_ACTION ' '
 
 // window
 static const char* win_title = "Music Bars";
@@ -43,6 +44,11 @@ static int frame_count = 0;
 static double prev_fps_sec = 0;
 static int prev_fps_frame = 0;
 static double fps_update_interval = 1.0;
+int currentTime = 0;
+int previousTime = 0;
+int timeInterval = 0;
+int elapsedInSecond = 0;
+int fps = 0;
 
 //object arrays
 static Real **vertices;
@@ -51,7 +57,10 @@ static int *numOfVerts;
 static int *numOfFaces;
 static int objectVertNum;
 static int objectFaceNum;
-static int numOfObjects = 2;
+static int numOfObjects = 1;
+static int numOfBars = 10;
+//position
+static Real sphereCenter[3] = {0.0, 1.0, 3.0};
 
 //drawing
 Real norm[3];
@@ -59,6 +68,21 @@ Real vert1[3];
 Real vert2[3];
 Real vert3[3];
 Real center[3];
+
+//movement
+Real barHeight = 0;
+Real ballSpeed = .5;
+Real xDist, yDist, zDist, dist;
+Real actionCenter[3] = {-1, 1, 24};
+static bool action = true;
+static Real eyePos[3];
+static Real cenPos[3];
+static Real upPos[3];
+
+// terrain
+static Real ground_color[3] = {0.25, 0.566, 0.25};
+static Real grid_unit = 10;
+static int num_adj_levels = 1;
 
 // ===== util
 
@@ -83,7 +107,20 @@ static void keyboard(unsigned char key, int x, int y) {
         case KEY_RESET_TRANSFORM:
             break;
             
-        case KEY_TOGGLE_LOCAL_TRANSFORM:
+        case KEY_ACTION:
+            camera_get(eyePos, cenPos, upPos);
+            xDist = fabs(eyePos[0] - actionCenter[0]);
+            yDist = fabs(eyePos[1] -actionCenter[1]);
+            zDist = fabs(eyePos[2] - actionCenter[2]);
+            dist = sqrtf(powf(xDist, 2.0) + powf(yDist, 2.0) + powf(zDist, 2.0));
+            
+            if(dist < 2){
+                if(action){
+                    action = false;
+                }else{
+                    action = true;
+                }
+            }
             break;
             
         default:
@@ -117,6 +154,23 @@ static void special(int key, int x, int y) {
 	}
 }
 
+// ===== math
+
+static Real get_bar_height(Real c[3]){
+    xDist = fabs(sphereCenter[0] - c[0]);
+    zDist = fabs(sphereCenter[2] - c[2]);
+    dist = sqrtf(powf(xDist, 2.0)+powf(zDist, 2.0));
+    return dist;
+}
+
+static void move_ball(){
+    if(sphereCenter[0] > 16 || sphereCenter[0] < -16){
+        ballSpeed = -ballSpeed;
+    }
+    
+    sphereCenter[0] += ballSpeed;
+}
+
 // ===== drawing
 
 static void draw_new_tri(Real v1[3], Real v2[3], Real v3[3]){
@@ -133,20 +187,84 @@ static void draw_new_tri(Real v1[3], Real v2[3], Real v3[3]){
 static void draw_verts(Real c[3], int objNum){
 
     
-    printf("SIZE OF vertices: %lu", sizeof(vertices[objNum]));
+//    printf("SIZE OF vertices: %lu", sizeof(vertices[objNum]));
     
     for(int x = 0; x<numOfFaces[objNum]; x+=3){
-        vert1[0] = vertices[objNum][((faces[objNum][x]-1)*3)];
-        vert1[1] = vertices[objNum][((faces[objNum][x]-1)*3)+1];
+        vert1[0] = vertices[objNum][((faces[objNum][x]-1)*3)]+c[0];
+        vert1[1] = vertices[objNum][((faces[objNum][x]-1)*3)+1]+c[1];
         vert1[2] = vertices[objNum][((faces[objNum][x]-1)*3)+2] + c[2];
         
-        vert2[0] = vertices[objNum][((faces[objNum][x+1]-1)*3)];
-        vert2[1] = vertices[objNum][((faces[objNum][x+1]-1)*3)+1];
+        vert2[0] = vertices[objNum][((faces[objNum][x+1]-1)*3)]+c[0];
+        vert2[1] = vertices[objNum][((faces[objNum][x+1]-1)*3)+1]+c[1];
         vert2[2] = vertices[objNum][((faces[objNum][x+1]-1)*3)+2] + c[2];
         
-        vert3[0] = vertices[objNum][((faces[objNum][x+2]-1)*3)];
-        vert3[1] = vertices[objNum][((faces[objNum][x+2]-1)*3)+1];
+        vert3[0] = vertices[objNum][((faces[objNum][x+2]-1)*3)]+c[0];
+        vert3[1] = vertices[objNum][((faces[objNum][x+2]-1)*3)+1]+c[1];
         vert3[2] = vertices[objNum][((faces[objNum][x+2]-1)*3)+2] + c[2];
+        
+        draw_new_tri(vert1, vert2, vert3);
+    }
+}
+static void draw_cube(Real c[3], Real h, Real w){
+    w = w/2;
+    Real mesh[] = {
+        //draw front side
+        c[0]-w, c[1], c[2]+w,
+        c[0]+w, c[1], c[2]+w,
+        c[0]-w, c[1]+h, c[2]+w,
+        c[0]+w, c[1], c[2]+w,
+        c[0]+w, c[1]+h, c[2]+w,
+        c[0]-w, c[1]+h, c[2]+w,
+        //draw back side
+        c[0]-w, c[1], c[2]-w,
+        c[0]+w, c[1], c[2]-w,
+        c[0]-w, c[1]+h, c[2]-w,
+        c[0]+w, c[1], c[2]-w,
+        c[0]+w, c[1]+h, c[2]-w,
+        c[0]-w, c[1]+h, c[2]-w,
+        //draw left side
+        c[0]-w, c[1], c[2]+w,
+        c[0]-w, c[1], c[2]-w,
+        c[0]-w, c[1]+h, c[2]+w,
+        c[0]-w, c[1], c[2]-w,
+        c[0]-w, c[1]+h, c[2]-w,
+        c[0]-w, c[1]+h, c[2]+w,
+        //draw right side
+        c[0]+w, c[1], c[2]+w,
+        c[0]+w, c[1], c[2]-w,
+        c[0]+w, c[1]+h, c[2]+w,
+        c[0]+w, c[1], c[2]-w,
+        c[0]+w, c[1]+h, c[2]-w,
+        c[0]+w, c[1]+h, c[2]+w,
+        //draw top
+        c[0]-w, c[1]+h, c[2]-w,
+        c[0]+w, c[1]+h, c[2]-w,
+        c[0]-w, c[1]+h, c[2]+w,
+        c[0]+w, c[1]+h, c[2]-w,
+        c[0]+w, c[1]+h, c[2]+w,
+        c[0]-w, c[1]+h, c[2]+w,
+        //draw bottom
+        c[0]-w, c[1], c[2]-w,
+        c[0]+w, c[1], c[2]-w,
+        c[0]-w, c[1], c[2]+w,
+        c[0]+w, c[1], c[2]-w,
+        c[0]+w, c[1], c[2]+w,
+        c[0]-w, c[1], c[2]+w,
+    };
+    
+    
+    for(int i = 0; i < 12; i++){
+        vert1[0] = mesh[(i*9)];
+        vert1[1] = mesh[(i*9)+1];
+        vert1[2] = mesh[(i*9)+2];
+        
+        vert2[0] = mesh[(i*9)+3];
+        vert2[1] = mesh[(i*9)+4];
+        vert2[2] = mesh[(i*9)+5];
+        
+        vert3[0] = mesh[(i*9)+6];
+        vert3[1] = mesh[(i*9)+7];
+        vert3[2] = mesh[(i*9)+8];
         
         draw_new_tri(vert1, vert2, vert3);
     }
@@ -160,15 +278,32 @@ static void display() {
 	// set camera viewpoint
 	camera_lookat();
 
-    center[0] = 0.0;
-    center[1] = 0.0;
-    center[2] = 0.0;
+    center[0] = sphereCenter[0];
+    center[1] = sphereCenter[1];
+    center[2] = sphereCenter[2];
     
-    for(int objNum = 0; objNum < numOfObjects; objNum++){
-        draw_verts(center, objNum);
-        center[2] = -2.0;
+    glColor3f(1.0, 1.0, 1.0);
+    
+    draw_verts(center, 0);//draw sphere
+    
+    center[0] = -18.5;
+    center[1] = 0;
+    center[2] = 0;
+    
+    for(int i = 0; i < numOfBars; i++){//draw bars
+        barHeight = get_bar_height(center);
+        draw_cube(center, 30/barHeight, 3);
+        center[0] += 4;
     }
-        
+    
+    center[0] = actionCenter[0];
+    center[1] = actionCenter[1];
+    center[2] = actionCenter[2];
+
+    draw_cube(center, .7, .7);
+    
+    grid_terrain_draw(num_adj_levels);
+    
 	glFlush();
     
 	// increment frame count for framerate code
@@ -195,27 +330,29 @@ static void set_lighting() {
 }
 
 static void idle() {
-	// tick sim every frame
-	// call game tick every frame interval
-	double now_sec = get_time();
-	double diff_tick_sec = now_sec - prev_tick_sec;
-	if(diff_tick_sec > frame_time) {
-		prev_tick_sec = now_sec;
-		glutPostRedisplay();
-	}
     
-	// calc fps every fps update interval
-	double diff_fps_sec = now_sec - prev_fps_sec;
-	if(diff_fps_sec > fps_update_interval) {
-		int diff_frames = frame_count - prev_fps_frame;
-		double fps = diff_frames / diff_fps_sec;
-		char title[256];
-		sprintf(title, "%s - %d fps", win_title, (int)fps);
+    currentTime = glutGet(GLUT_ELAPSED_TIME);
+    timeInterval = currentTime - previousTime;
+    
+    if(timeInterval > 16){
+        glutPostRedisplay();
+        previousTime = currentTime;
+        elapsedInSecond += timeInterval;
+        
+        if(action)
+            move_ball();
+    }
+    
+    if(elapsedInSecond > 1000){
+        fps = frame_count;
+        
+        frame_count = 0;
+        elapsedInSecond = 0;
+        
+        char title[256];
+        sprintf(title, "%s - %d fps", win_title, (int)fps);
 		glutSetWindowTitle(title);
-		glutPostRedisplay();
-		prev_fps_sec = now_sec;
-		prev_fps_frame = frame_count;
-	}
+    }
 }
 
 static void parse_obj(char* fileName, int objNum){
@@ -237,7 +374,6 @@ static void parse_obj(char* fileName, int objNum){
 	while( fgets(read_line, 500, obj_file_stream) ){
 
 		current_token = strtok(read_line, " ");
-		printf("token: %s\n", current_token);
 
 		if( current_token == NULL || current_token[0] == '#'){
 			printf("Skipping\n");
@@ -261,6 +397,8 @@ static void parse_obj(char* fileName, int objNum){
 			}
 		}
 	}
+    
+    free(current_token);
 }
 
 static void getNumOfVertsFaces(char* fileName, int objNum){
@@ -278,7 +416,6 @@ static void getNumOfVertsFaces(char* fileName, int objNum){
 	while( fgets(read_line, 500, obj_file_stream) ){
 
 		current_token = strtok(read_line, " ");
-		printf("token: %s\n", current_token);
 
 		if( current_token == NULL || current_token[0] == '#'){
 			printf("Skipping\n");
@@ -306,6 +443,8 @@ static void getNumOfVertsFaces(char* fileName, int objNum){
     
     numOfFaces[objNum] = objectFaceNum;
     numOfVerts[objNum] = objectVertNum;
+    
+    free(current_token);
 }
 
 
@@ -315,12 +454,16 @@ static void init(){
     faces = (int**)malloc(numOfObjects*sizeof(int*));
     numOfVerts = (int*)malloc(numOfObjects*sizeof(int));
     numOfFaces = (int*)malloc(numOfObjects*sizeof(int));
-    
-    getNumOfVertsFaces("box.obj", 0);//get number of verts and faces for box.obj
-    getNumOfVertsFaces("sphere.obj", 1);
 
-    parse_obj("box.obj", 0);
-    parse_obj("sphere.obj", 1);
+    getNumOfVertsFaces("sphere.obj", 0);
+
+    parse_obj("sphere.obj", 0);
+    
+    //init terrain
+    grid_terrain_set_draw_op(GL_TRIANGLES);
+	grid_terrain_set_unit(grid_unit);
+	grid_terrain_set_color(ground_color);
+	grid_terrain_create();
 }
 
 int main(int argc, char* argv[]) {
@@ -345,6 +488,8 @@ int main(int argc, char* argv[]) {
     
 	set_projection();
 	set_lighting();
+    
+    numOfVerts = NULL;
 	
 	glutMainLoop();
     

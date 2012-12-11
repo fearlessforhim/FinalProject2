@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB58E2591676AD1D00D8D1D3 /* grid_terrain.c in Sources */ = {isa = PBXBuildFile; fileRef = AB58E2571676AD1D00D8D1D3 /* grid_terrain.c */; };
+		AB58E25D1676AD6A00D8D1D3 /* hashmap.c in Sources */ = {isa = PBXBuildFile; fileRef = AB58E25B1676AD6900D8D1D3 /* hashmap.c */; };
+		AB58E2601676AD9100D8D1D3 /* grutil.c in Sources */ = {isa = PBXBuildFile; fileRef = AB58E25E1676AD9100D8D1D3 /* grutil.c */; };
+		AB58E2661676ADBF00D8D1D3 /* fontutil_glut.c in Sources */ = {isa = PBXBuildFile; fileRef = AB58E2621676ADBF00D8D1D3 /* fontutil_glut.c */; };
+		AB58E2671676ADBF00D8D1D3 /* fontutil.c in Sources */ = {isa = PBXBuildFile; fileRef = AB58E2631676ADBF00D8D1D3 /* fontutil.c */; };
 		ABCE66A216767A08002AFD7B /* FinalProject2.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = ABCE66A116767A08002AFD7B /* FinalProject2.1 */; };
 		ABCE66B016767A5D002AFD7B /* camera.c in Sources */ = {isa = PBXBuildFile; fileRef = ABCE66A816767A5D002AFD7B /* camera.c */; };
 		ABCE66B116767A5D002AFD7B /* geom.c in Sources */ = {isa = PBXBuildFile; fileRef = ABCE66AA16767A5D002AFD7B /* geom.c */; };
@@ -32,6 +37,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AB58E2571676AD1D00D8D1D3 /* grid_terrain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = grid_terrain.c; sourceTree = "<group>"; };
+		AB58E2581676AD1D00D8D1D3 /* grid_terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = grid_terrain.h; sourceTree = "<group>"; };
+		AB58E25B1676AD6900D8D1D3 /* hashmap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hashmap.c; sourceTree = "<group>"; };
+		AB58E25C1676AD6A00D8D1D3 /* hashmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hashmap.h; sourceTree = "<group>"; };
+		AB58E25E1676AD9100D8D1D3 /* grutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = grutil.c; sourceTree = "<group>"; };
+		AB58E25F1676AD9100D8D1D3 /* grutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = grutil.h; sourceTree = "<group>"; };
+		AB58E2621676ADBF00D8D1D3 /* fontutil_glut.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fontutil_glut.c; sourceTree = "<group>"; };
+		AB58E2631676ADBF00D8D1D3 /* fontutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fontutil.c; sourceTree = "<group>"; };
+		AB58E2641676ADBF00D8D1D3 /* fontutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fontutil.h; sourceTree = "<group>"; };
 		ABCE669B16767A08002AFD7B /* FinalProject2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FinalProject2; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABCE66A116767A08002AFD7B /* FinalProject2.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = FinalProject2.1; sourceTree = "<group>"; };
 		ABCE66A816767A5D002AFD7B /* camera.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = camera.c; sourceTree = "<group>"; };
@@ -85,6 +99,15 @@
 		ABCE669E16767A08002AFD7B /* FinalProject2 */ = {
 			isa = PBXGroup;
 			children = (
+				AB58E2621676ADBF00D8D1D3 /* fontutil_glut.c */,
+				AB58E2631676ADBF00D8D1D3 /* fontutil.c */,
+				AB58E2641676ADBF00D8D1D3 /* fontutil.h */,
+				AB58E25E1676AD9100D8D1D3 /* grutil.c */,
+				AB58E25F1676AD9100D8D1D3 /* grutil.h */,
+				AB58E25B1676AD6900D8D1D3 /* hashmap.c */,
+				AB58E25C1676AD6A00D8D1D3 /* hashmap.h */,
+				AB58E2571676AD1D00D8D1D3 /* grid_terrain.c */,
+				AB58E2581676AD1D00D8D1D3 /* grid_terrain.h */,
 				ABCE66C81676884F002AFD7B /* box.obj */,
 				ABCE66B416767B03002AFD7B /* project2.c */,
 				ABCE66C0167684F8002AFD7B /* objectLoader.c */,
@@ -158,6 +181,11 @@
 				ABCE66B316767A5D002AFD7B /* trace.c in Sources */,
 				ABCE66B516767B03002AFD7B /* project2.c in Sources */,
 				ABCE66C1167684F9002AFD7B /* objectLoader.c in Sources */,
+				AB58E2591676AD1D00D8D1D3 /* grid_terrain.c in Sources */,
+				AB58E25D1676AD6A00D8D1D3 /* hashmap.c in Sources */,
+				AB58E2601676AD9100D8D1D3 /* grutil.c in Sources */,
+				AB58E2661676ADBF00D8D1D3 /* fontutil_glut.c in Sources */,
+				AB58E2671676ADBF00D8D1D3 /* fontutil.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +278,7 @@
 				ABCE66A716767A08002AFD7B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
