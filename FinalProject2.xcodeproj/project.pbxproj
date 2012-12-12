@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB20633C16792EEF004974B7 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = AB20633A16792EEF004974B7 /* stb_image.c */; };
+		AB20633F16792EF9004974B7 /* imageutil.c in Sources */ = {isa = PBXBuildFile; fileRef = AB20633D16792EF9004974B7 /* imageutil.c */; };
+		AB206341167933F7004974B7 /* texturing.c in Sources */ = {isa = PBXBuildFile; fileRef = AB206340167933F7004974B7 /* texturing.c */; };
 		AB58E2591676AD1D00D8D1D3 /* grid_terrain.c in Sources */ = {isa = PBXBuildFile; fileRef = AB58E2571676AD1D00D8D1D3 /* grid_terrain.c */; };
 		AB58E25D1676AD6A00D8D1D3 /* hashmap.c in Sources */ = {isa = PBXBuildFile; fileRef = AB58E25B1676AD6900D8D1D3 /* hashmap.c */; };
 		AB58E2601676AD9100D8D1D3 /* grutil.c in Sources */ = {isa = PBXBuildFile; fileRef = AB58E25E1676AD9100D8D1D3 /* grutil.c */; };
@@ -37,6 +40,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AB20633A16792EEF004974B7 /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_image.c; sourceTree = "<group>"; };
+		AB20633B16792EEF004974B7 /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		AB20633D16792EF9004974B7 /* imageutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = imageutil.c; sourceTree = "<group>"; };
+		AB20633E16792EF9004974B7 /* imageutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageutil.h; sourceTree = "<group>"; };
+		AB206340167933F7004974B7 /* texturing.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = texturing.c; sourceTree = "<group>"; };
+		AB20634316793409004974B7 /* texturing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = texturing.h; path = ../texturing.h; sourceTree = "<group>"; };
 		AB58E2571676AD1D00D8D1D3 /* grid_terrain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = grid_terrain.c; sourceTree = "<group>"; };
 		AB58E2581676AD1D00D8D1D3 /* grid_terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = grid_terrain.h; sourceTree = "<group>"; };
 		AB58E25B1676AD6900D8D1D3 /* hashmap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hashmap.c; sourceTree = "<group>"; };
@@ -77,6 +86,87 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB6CF1811676DCE500D76D78 /* camera */ = {
+			isa = PBXGroup;
+			children = (
+				ABCE66A816767A5D002AFD7B /* camera.c */,
+				ABCE66A916767A5D002AFD7B /* camera.h */,
+			);
+			name = camera;
+			sourceTree = "<group>";
+		};
+		AB6CF1831676DD0700D76D78 /* fontutil */ = {
+			isa = PBXGroup;
+			children = (
+				AB58E2621676ADBF00D8D1D3 /* fontutil_glut.c */,
+				AB58E2631676ADBF00D8D1D3 /* fontutil.c */,
+				AB58E2641676ADBF00D8D1D3 /* fontutil.h */,
+			);
+			name = fontutil;
+			sourceTree = "<group>";
+		};
+		AB6CF1841676DD0E00D76D78 /* grutil */ = {
+			isa = PBXGroup;
+			children = (
+				AB58E25E1676AD9100D8D1D3 /* grutil.c */,
+				AB58E25F1676AD9100D8D1D3 /* grutil.h */,
+			);
+			name = grutil;
+			sourceTree = "<group>";
+		};
+		AB6CF1851676DD1500D76D78 /* hashmap */ = {
+			isa = PBXGroup;
+			children = (
+				AB58E25B1676AD6900D8D1D3 /* hashmap.c */,
+				AB58E25C1676AD6A00D8D1D3 /* hashmap.h */,
+			);
+			name = hashmap;
+			sourceTree = "<group>";
+		};
+		AB6CF1861676DD1C00D76D78 /* gridterrain */ = {
+			isa = PBXGroup;
+			children = (
+				AB58E2571676AD1D00D8D1D3 /* grid_terrain.c */,
+				AB58E2581676AD1D00D8D1D3 /* grid_terrain.h */,
+			);
+			name = gridterrain;
+			sourceTree = "<group>";
+		};
+		AB6CF1871676DD2700D76D78 /* geom */ = {
+			isa = PBXGroup;
+			children = (
+				ABCE66AA16767A5D002AFD7B /* geom.c */,
+				ABCE66AB16767A5D002AFD7B /* geom.h */,
+			);
+			name = geom;
+			sourceTree = "<group>";
+		};
+		AB6CF1881676DD2B00D76D78 /* precision */ = {
+			isa = PBXGroup;
+			children = (
+				ABCE66AC16767A5D002AFD7B /* precision.c */,
+				ABCE66AD16767A5D002AFD7B /* precision.h */,
+			);
+			name = precision;
+			sourceTree = "<group>";
+		};
+		AB6CF1891676DD3200D76D78 /* trace */ = {
+			isa = PBXGroup;
+			children = (
+				ABCE66AE16767A5D002AFD7B /* trace.c */,
+				ABCE66AF16767A5D002AFD7B /* trace.h */,
+			);
+			name = trace;
+			sourceTree = "<group>";
+		};
+		AB6CF18A1676DD4400D76D78 /* objectLoader */ = {
+			isa = PBXGroup;
+			children = (
+				ABCE66C0167684F8002AFD7B /* objectLoader.c */,
+			);
+			name = objectLoader;
+			sourceTree = "<group>";
+		};
 		ABCE669016767A08002AFD7B = {
 			isa = PBXGroup;
 			children = (
@@ -99,26 +189,23 @@
 		ABCE669E16767A08002AFD7B /* FinalProject2 */ = {
 			isa = PBXGroup;
 			children = (
-				AB58E2621676ADBF00D8D1D3 /* fontutil_glut.c */,
-				AB58E2631676ADBF00D8D1D3 /* fontutil.c */,
-				AB58E2641676ADBF00D8D1D3 /* fontutil.h */,
-				AB58E25E1676AD9100D8D1D3 /* grutil.c */,
-				AB58E25F1676AD9100D8D1D3 /* grutil.h */,
-				AB58E25B1676AD6900D8D1D3 /* hashmap.c */,
-				AB58E25C1676AD6A00D8D1D3 /* hashmap.h */,
-				AB58E2571676AD1D00D8D1D3 /* grid_terrain.c */,
-				AB58E2581676AD1D00D8D1D3 /* grid_terrain.h */,
+				AB20634316793409004974B7 /* texturing.h */,
+				AB20633D16792EF9004974B7 /* imageutil.c */,
+				AB20633E16792EF9004974B7 /* imageutil.h */,
+				AB20633A16792EEF004974B7 /* stb_image.c */,
+				AB20633B16792EEF004974B7 /* stb_image.h */,
+				AB6CF1811676DCE500D76D78 /* camera */,
+				AB6CF1831676DD0700D76D78 /* fontutil */,
+				AB6CF1841676DD0E00D76D78 /* grutil */,
+				AB6CF1851676DD1500D76D78 /* hashmap */,
+				AB6CF1861676DD1C00D76D78 /* gridterrain */,
 				ABCE66C81676884F002AFD7B /* box.obj */,
 				ABCE66B416767B03002AFD7B /* project2.c */,
-				ABCE66C0167684F8002AFD7B /* objectLoader.c */,
-				ABCE66A816767A5D002AFD7B /* camera.c */,
-				ABCE66A916767A5D002AFD7B /* camera.h */,
-				ABCE66AA16767A5D002AFD7B /* geom.c */,
-				ABCE66AB16767A5D002AFD7B /* geom.h */,
-				ABCE66AC16767A5D002AFD7B /* precision.c */,
-				ABCE66AD16767A5D002AFD7B /* precision.h */,
-				ABCE66AE16767A5D002AFD7B /* trace.c */,
-				ABCE66AF16767A5D002AFD7B /* trace.h */,
+				AB206340167933F7004974B7 /* texturing.c */,
+				AB6CF18A1676DD4400D76D78 /* objectLoader */,
+				AB6CF1871676DD2700D76D78 /* geom */,
+				AB6CF1881676DD2B00D76D78 /* precision */,
+				AB6CF1891676DD3200D76D78 /* trace */,
 				ABCE66A116767A08002AFD7B /* FinalProject2.1 */,
 			);
 			path = FinalProject2;
@@ -186,6 +273,9 @@
 				AB58E2601676AD9100D8D1D3 /* grutil.c in Sources */,
 				AB58E2661676ADBF00D8D1D3 /* fontutil_glut.c in Sources */,
 				AB58E2671676ADBF00D8D1D3 /* fontutil.c in Sources */,
+				AB20633C16792EEF004974B7 /* stb_image.c in Sources */,
+				AB20633F16792EF9004974B7 /* imageutil.c in Sources */,
+				AB206341167933F7004974B7 /* texturing.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

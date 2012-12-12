@@ -48,7 +48,7 @@ static char camera_help[] = \
 "  translate -x:  'a'\n"\
 "  translate +x:  'd'\n"\
 "  translate -y:  '-'\n"\
-"  translate +y:  '+'\n"\
+"  translate +y:  '='\n"\
 "  translate -z:  'w'\n"\
 "  translate +z:  's'\n"\
 "  rotate    -x:  up\n"\
@@ -201,12 +201,6 @@ void camera_get(Real* eye_ret, Real* cen_ret, Real* up_ret) {
 	geom_vector3_copy(cen, cen_ret);
 	geom_vector3_copy(up, up_ret);
 }
-
-//static void camera_get_pos(Real *camPos){
-//    camPos[0] = eye[0];
-//    camPos[1] = eye[1];
-//    camPos[2] = eye[2];
-//}
 
 static void print_camera_info() {
 	camera_get(eye, cen, up);
