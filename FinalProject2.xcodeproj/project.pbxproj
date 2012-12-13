@@ -45,7 +45,8 @@
 		AB20633D16792EF9004974B7 /* imageutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = imageutil.c; sourceTree = "<group>"; };
 		AB20633E16792EF9004974B7 /* imageutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageutil.h; sourceTree = "<group>"; };
 		AB206340167933F7004974B7 /* texturing.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = texturing.c; sourceTree = "<group>"; };
-		AB20634316793409004974B7 /* texturing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = texturing.h; path = ../texturing.h; sourceTree = "<group>"; };
+		AB20634616793B47004974B7 /* texturing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = texturing.h; sourceTree = "<group>"; };
+		AB20634716793C6A004974B7 /* sphere.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = sphere.obj; sourceTree = "<group>"; };
 		AB58E2571676AD1D00D8D1D3 /* grid_terrain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = grid_terrain.c; sourceTree = "<group>"; };
 		AB58E2581676AD1D00D8D1D3 /* grid_terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = grid_terrain.h; sourceTree = "<group>"; };
 		AB58E25B1676AD6900D8D1D3 /* hashmap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hashmap.c; sourceTree = "<group>"; };
@@ -69,8 +70,6 @@
 		ABCE66B616767B26002AFD7B /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		ABCE66B716767B26002AFD7B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		ABCE66C0167684F8002AFD7B /* objectLoader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = objectLoader.c; sourceTree = "<group>"; };
-		ABCE66C81676884F002AFD7B /* box.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = box.obj; path = ../box.obj; sourceTree = "<group>"; };
-		ABCE66CF167688BB002AFD7B /* box.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = box.obj; path = FinalProject2/box.obj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +85,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB20634416793A4C004974B7 /* texturing */ = {
+			isa = PBXGroup;
+			children = (
+				AB20634616793B47004974B7 /* texturing.h */,
+				AB206340167933F7004974B7 /* texturing.c */,
+			);
+			name = texturing;
+			sourceTree = "<group>";
+		};
+		AB20634516793A59004974B7 /* image */ = {
+			isa = PBXGroup;
+			children = (
+				AB20633D16792EF9004974B7 /* imageutil.c */,
+				AB20633E16792EF9004974B7 /* imageutil.h */,
+				AB20633A16792EEF004974B7 /* stb_image.c */,
+				AB20633B16792EEF004974B7 /* stb_image.h */,
+			);
+			name = image;
+			sourceTree = "<group>";
+		};
 		AB6CF1811676DCE500D76D78 /* camera */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,7 +189,7 @@
 		ABCE669016767A08002AFD7B = {
 			isa = PBXGroup;
 			children = (
-				ABCE66CF167688BB002AFD7B /* box.obj */,
+				AB20634716793C6A004974B7 /* sphere.obj */,
 				ABCE66B616767B26002AFD7B /* GLUT.framework */,
 				ABCE66B716767B26002AFD7B /* OpenGL.framework */,
 				ABCE669E16767A08002AFD7B /* FinalProject2 */,
@@ -189,19 +208,14 @@
 		ABCE669E16767A08002AFD7B /* FinalProject2 */ = {
 			isa = PBXGroup;
 			children = (
-				AB20634316793409004974B7 /* texturing.h */,
-				AB20633D16792EF9004974B7 /* imageutil.c */,
-				AB20633E16792EF9004974B7 /* imageutil.h */,
-				AB20633A16792EEF004974B7 /* stb_image.c */,
-				AB20633B16792EEF004974B7 /* stb_image.h */,
+				ABCE66B416767B03002AFD7B /* project2.c */,
+				AB20634416793A4C004974B7 /* texturing */,
+				AB20634516793A59004974B7 /* image */,
 				AB6CF1811676DCE500D76D78 /* camera */,
 				AB6CF1831676DD0700D76D78 /* fontutil */,
 				AB6CF1841676DD0E00D76D78 /* grutil */,
 				AB6CF1851676DD1500D76D78 /* hashmap */,
 				AB6CF1861676DD1C00D76D78 /* gridterrain */,
-				ABCE66C81676884F002AFD7B /* box.obj */,
-				ABCE66B416767B03002AFD7B /* project2.c */,
-				AB206340167933F7004974B7 /* texturing.c */,
 				AB6CF18A1676DD4400D76D78 /* objectLoader */,
 				AB6CF1871676DD2700D76D78 /* geom */,
 				AB6CF1881676DD2B00D76D78 /* precision */,

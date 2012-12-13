@@ -16,6 +16,10 @@ static const char* pause_file = "wm_pause.png";
 static struct Image pause_image;
 static GLuint pause_texture = 0;
 
+static const char* wall_file = "rockwall.jpg";
+static struct Image wall_image;
+static GLuint wall_texture = 0;
+
 static void init_texture(const char* img_file, struct Image* img, GLuint* tex_id) {
 	// load image
 	memset(img, 0, sizeof(struct Image));
@@ -52,5 +56,6 @@ static void init_texture(const char* img_file, struct Image* img, GLuint* tex_id
 void init_textures() {
 	init_texture(play_file, &play_image, &play_texture);
 	init_texture(pause_file, &pause_image, &pause_texture);
+    init_texture(wall_file, &wall_image, &wall_texture);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }

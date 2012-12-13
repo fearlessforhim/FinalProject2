@@ -37,15 +37,9 @@ static int init_win_height = 600;
 static int win_w() {return glutGet(GLUT_WINDOW_WIDTH);}
 static int win_h() {return glutGet(GLUT_WINDOW_HEIGHT);}
 
-// tick rate
-static double frame_time = 1.0 / FPS;
-static double prev_tick_sec = 0;
 
 // fps
 static int frame_count = 0;
-static double prev_fps_sec = 0;
-static int prev_fps_frame = 0;
-static double fps_update_interval = 1.0;
 int currentTime = 0;
 int previousTime = 0;
 int timeInterval = 0;
@@ -59,7 +53,7 @@ static int *numOfVerts;
 static int *numOfFaces;
 static int objectVertNum;
 static int objectFaceNum;
-static int numOfObjects = 1;
+static int numOfObjects = 5;
 static int numOfBars = 10;
 //position
 static Real sphereCenter[3] = {0.0, 1.0, 3.0};
@@ -222,7 +216,7 @@ static void draw_texture_tri(Real v1[3], Real v2[3], Real v3[3], int textureNum)
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-static void draw_verts(Real c[3], int objNum){
+static void draw_verts(Real c[3], int objNum, bool textured, int currTex){
     
     
     //    printf("SIZE OF vertices: %lu", sizeof(vertices[objNum]));
@@ -240,7 +234,10 @@ static void draw_verts(Real c[3], int objNum){
         vert3[1] = vertices[objNum][((faces[objNum][x+2]-1)*3)+1]+c[1];
         vert3[2] = vertices[objNum][((faces[objNum][x+2]-1)*3)+2] + c[2];
         
+        if(!textured)
         draw_new_tri(vert1, vert2, vert3);
+        else
+            draw_texture_tri(vert1, vert2, vert3, currTex);
     }
 }
 
@@ -309,7 +306,10 @@ static void draw_cube(Real c[3], Real h, Real w, bool withTexture){
             if(!withTexture){
                 draw_new_tri(vert1, vert2, vert3);
             }else{
-                draw_texture_tri(vert1, vert2, vert3, texture_num);
+                if(action)
+                draw_texture_tri(vert1, vert2, vert3, 1);
+                else
+                    draw_texture_tri(vert1, vert2, vert3, 2);
             }
         }
 
@@ -330,7 +330,12 @@ static void display() {
     
     glColor3f(1.0, 1.0, 1.0);
     
-    draw_verts(center, 0);//draw sphere
+    draw_verts(center, 0, false, 0);//draw sphere
+    
+    center[0] = 0;
+    center[1] = 0;
+    center[2] = 10.0;
+    draw_verts(center, 1, true, 3);//draw arena
     
     center[0] = -18.5;
     center[1] = 0;
@@ -338,6 +343,7 @@ static void display() {
     
     for(int i = 0; i < numOfBars; i++){//draw bars
         barHeight = get_bar_height(center);
+        glColor3f(0.5, 0.1, barHeight/5);
         draw_cube(center, 30/barHeight, 3, false);
         center[0] += 4;
     }
@@ -346,10 +352,24 @@ static void display() {
     center[1] = actionCenter[1];
     center[2] = actionCenter[2];
     
+    glColor3f(1.0, 1.0, 1.0);
     draw_cube(center, .7, .7, true);//draw action block
     
-    grid_terrain_draw(num_adj_levels);
+    center[0] = 18.5;
+    center[1] = 0.1;
+    center[2] = 3.0;
+    draw_verts(center, 2, false, 0);//draw end 1
+    center[0] = -18.5;
+    draw_verts(center, 3, false, 0);//draw end 2
     
+    
+//    grid_terrain_draw(num_adj_levels);//draw terrain
+    
+    center[0] = -28;
+    draw_verts(center, 4, false, 0);//draw stands
+    glRotatef(90, 0, 1, 0);
+    draw_verts(center, 4, false, 0);//draw stands
+
 	glFlush();
     
 	// increment frame count for framerate code
@@ -504,8 +524,16 @@ static void init(){
     numOfFaces = (int*)malloc(numOfObjects*sizeof(int));
     
     getNumOfVertsFaces("sphere.obj", 0);
+    getNumOfVertsFaces("arena.obj", 1);
+    getNumOfVertsFaces("ends1.obj", 2);
+    getNumOfVertsFaces("ends2.obj", 3);
+    getNumOfVertsFaces("stands.obj", 4);
     
     parse_obj("sphere.obj", 0);
+    parse_obj("arena.obj", 1);
+    parse_obj("ends1.obj", 2);
+    parse_obj("ends2.obj", 3);
+    parse_obj("stands.obj", 4);
     
     //init terrain
     grid_terrain_set_draw_op(GL_TRIANGLES);
