@@ -7,26 +7,14 @@
 #include <OpenGL/OpenGL.h>
 
 //#include "keyboard/keyboard.h"
-//#include "mouse/mouse.h"
+#include "mouse.h"
 
 #include "precision.h"
-//#include "trace/trace.h"
 #include "geom.h"
 
 #include "camera.h"
 
-/*
- #define KEY_TRANS_x SDLK_a
- #define KEY_TRANS_X SDLK_d
- #define KEY_TRANS_y SDLK_MINUS
- #define KEY_TRANS_Y SDLK_PLUS
- #define KEY_TRANS_z SDLK_w
- #define KEY_TRANS_Z SDLK_s
- #define KEY_ROT_x SDLK_DOWN
- #define KEY_ROT_X SDLK_UP
- #define KEY_ROT_y SDLK_LEFT
- #define KEY_ROT_Y SDLK_RIGHT
- */
+
 #define KEY_TRANS_x 'a'
 #define KEY_TRANS_X 'd'
 #define KEY_TRANS_y '-'
@@ -76,10 +64,12 @@ static Real key_trans_rate = 0.5;
 static Real key_rot_rate = 5.0;
 
 // mouse
-//static int mouse_left_button_state = MOUSE_BUTTON_UP;
-//static int mouse_right_button = MOUSE_BUTTON_UP;
+static int mouse_left_button_state = MOUSE_BUTTON_UP;
+static int mouse_right_button = MOUSE_BUTTON_UP;
 static int prev_motion_x = -1;
 static int prev_motion_y = -1;
+static Real mouse_rot_rate = 0.5;
+static Real mouse_trans_rate = 0.05;
 
 // joystick
 static Real joy_trans[3] = {0, 0, 0};
@@ -221,8 +211,8 @@ int camera_keyboard(int key) {
 		fflush(stdout);
 	}
     
-//	int shift_key_down = keyboard_get_modifiers() & KBD_MOD_SHIFT;
-//	int ctrl_key_down = keyboard_get_modifiers() & KBD_MOD_CTRL;
+    //	int shift_key_down = keyboard_get_modifiers() & KBD_MOD_SHIFT;
+    //	int ctrl_key_down = keyboard_get_modifiers() & KBD_MOD_CTRL;
 	
 	switch(key) {
         case KEY_TRANS_x: { Real v[3] = {-key_trans_rate, 0, 0}; camera_translate(v); } break;
@@ -235,10 +225,10 @@ int camera_keyboard(int key) {
         case KEY_ROT_X: { camera_rotate_x( key_rot_rate); } break;
         case KEY_ROT_y: { camera_rotate_y( key_rot_rate); } break;
         case KEY_ROT_Y: { camera_rotate_y(-key_rot_rate); } break;
-//        case KEY_PRINT_CAM:
-//            print_camera_info();
-//            break;
-//        case KEY_HELP: print_camera_help(); break;
+            //        case KEY_PRINT_CAM:
+            //            print_camera_info();
+            //            break;
+            //        case KEY_HELP: print_camera_help(); break;
             /*
              case KEY_TRANS_z: return camera_keyboard(KEY_TRANS_z, x, y);
              case KEY_TRANS_Z: return camera_keyboard(KEY_TRANS_Z, x, y);
@@ -261,25 +251,25 @@ int camera_keyboard(int key) {
 
 int camera_mouse(int button, int state, int x, int y) {
 	// debug
-//	if(_camera_debug) {
-//		printf("camera_mouse(): button: %d, state: %d, x: %d, y: %d\n", button, state, x, y);
-//		fflush(stdout);
-//	}
-//    
-//	switch(button) {
-//        case MOUSE_BUTTON_LEFT:
-//            mouse_left_button_state = state;
-//			prev_motion_x = -1;
-//			prev_motion_y = -1;
-//            break;
-//        case MOUSE_BUTTON_RIGHT:
-//            mouse_right_button = state;
-//			prev_motion_x = -1;
-//			prev_motion_y = -1;
-//            break;
-//        default: break;
-//            //		printf("camera_mouse(): button: %d, state: %d\n", button, state);
-//	}
+	if(_camera_debug) {
+		printf("camera_mouse(): button: %d, state: %d, x: %d, y: %d\n", button, state, x, y);
+		fflush(stdout);
+	}
+    
+	switch(button) {
+        case MOUSE_BUTTON_LEFT:
+            mouse_left_button_state = state;
+			prev_motion_x = -1;
+			prev_motion_y = -1;
+            break;
+        case MOUSE_BUTTON_RIGHT:
+            mouse_right_button = state;
+			prev_motion_x = -1;
+			prev_motion_y = -1;
+            break;
+        default: break;
+            printf("camera_mouse(): button: %d, state: %d\n", button, state);
+	}
 	return 0;
 }
 
@@ -292,31 +282,24 @@ int camera_motion(int x, int y) {
     
     //	ctrl_key_down = glutGetModifiers() & GLUT_ACTIVE_CTRL;
 	int rc = 0;
-//	if(mouse_left_button_state == MOUSE_BUTTON_DOWN) {
-//		if(prev_motion_x > 0) {
-//			int dx = x - prev_motion_x;
-//			int dy = y - prev_motion_y;
-//            camera_rotate_y(dx * mouse_rot_rate);
-//            camera_rotate_x(dy * mouse_rot_rate);
-//		}
-//		rc = 1;
-//	}
-//	else if(mouse_right_button == MOUSE_BUTTON_DOWN) {
-//		if(prev_motion_x > 0) {
-//			int dx = x - prev_motion_x;
-//			int dy = y - prev_motion_y;
-//			// can't portably detect this with GLUT :(
-//			if(ctrl_key_down) {
-//				Real v[3] = {-mouse_trans_rate * dx, mouse_trans_rate * -dy, 0};
-//				camera_translate(v);
-//			}
-//			else {
-//				Real v[3] = {-mouse_trans_rate * dx, 0, mouse_trans_rate * -dy};
-//				camera_translate(v);
-//			}
-//		}
-//		rc = 1;
-//	}
+	if(mouse_left_button_state == MOUSE_BUTTON_DOWN) {
+		if(prev_motion_x > 0) {
+			int dx = x - prev_motion_x;
+			int dy = y - prev_motion_y;
+            camera_rotate_y(dx * mouse_rot_rate);
+            camera_rotate_x(dy * mouse_rot_rate);
+		}
+		rc = 1;
+	}
+	else if(mouse_right_button == MOUSE_BUTTON_DOWN) {
+		if(prev_motion_x > 0) {
+			int dx = x - prev_motion_x;
+			int dy = y - prev_motion_y;
+            Real v[3] = {-mouse_trans_rate * dx, 0, mouse_trans_rate * -dy};
+            camera_translate(v);
+		}
+		rc = 1;
+	}
 	prev_motion_x = x;
 	prev_motion_y = y;
 	return rc;
@@ -375,7 +358,7 @@ void camera_tick() {
 }
 
 void camera_lookat() {
-//    printf("Eye at: %f %f %f\n", eye[0], eye[1], eye[2]);
+    //    printf("Eye at: %f %f %f\n", eye[0], eye[1], eye[2]);
 	gluLookAt(
               eye[0], eye[1], eye[2],
               cen[0], cen[1], cen[2],

@@ -21,6 +21,7 @@
 #include "grid_terrain.h"
 #include "imageutil.h"
 #include "texturing.h"
+#include "mouse.h"
 
 //#include "mvm.h"
 
@@ -53,7 +54,7 @@ static int *numOfVerts;
 static int *numOfFaces;
 static int objectVertNum;
 static int objectFaceNum;
-static int numOfObjects = 5;
+static int numOfObjects = 6;
 static int numOfBars = 10;
 //position
 static Real sphereCenter[3] = {0.0, 1.0, 3.0};
@@ -66,6 +67,7 @@ Real vert3[3];
 Real center[3];
 int texture_num = 2;
 bool draw_top = false;
+int rotation = 0;
 
 
 
@@ -82,7 +84,16 @@ static Real upPos[3];
 // terrain
 static Real ground_color[3] = {0.25, 0.566, 0.25};
 static Real grid_unit = 10;
-static int num_adj_levels = 1;
+static int num_adj_levels = 2;
+
+//lighting
+Real globalAmbLight[4] = {0.2, 0.2, 0.2, 1.0};
+Real ambLight[4] = {0.3, 0.3, 0.3, 1.0};
+Real diffLight[4] = {1.0, 1.0, 1.0, 1.0};
+Real specLight[4] = {1.0, 1.0, 1.0, 1.0};
+Real dirI[4] = {1, 0, 0, 0};
+Real angle = 0;
+Real Noemit[4] = {0.0, 0.0, 0.0, 1.0};
 
 // ===== util
 
@@ -114,12 +125,10 @@ static void keyboard(unsigned char key, int x, int y) {
             zDist = fabs(eyePos[2] - actionCenter[2]);
             dist = sqrtf(powf(xDist, 2.0) + powf(yDist, 2.0) + powf(zDist, 2.0));
             
-            if(dist < 2){
+            if(dist < 1.5){
                 if(action){
-                    texture_num = 1;
                     action = false;
                 }else{
-                    texture_num = 2;
                     action = true;
                 }
             }
@@ -128,6 +137,17 @@ static void keyboard(unsigned char key, int x, int y) {
         default:
             break;
 	}
+}
+
+static void mouse(int glut_button, int glut_state, int x, int glut_y) {
+	int button = mouse_button(glut_button);
+	int state = mouse_state(glut_state);
+//	int y = win_h() - glut_y;
+    
+	// do cam transform in nav mode
+	if(camera_mouse(button, state, x, glut_y))
+		return;
+    
 }
 
 static void special(int key, int x, int y) {
@@ -307,9 +327,9 @@ static void draw_cube(Real c[3], Real h, Real w, bool withTexture){
                 draw_new_tri(vert1, vert2, vert3);
             }else{
                 if(action)
-                draw_texture_tri(vert1, vert2, vert3, 1);
+                draw_texture_tri(vert1, vert2, vert3, 2);
                 else
-                    draw_texture_tri(vert1, vert2, vert3, 2);
+                    draw_texture_tri(vert1, vert2, vert3, 1);
             }
         }
 
@@ -320,6 +340,14 @@ static void display() {
     
 	glLoadIdentity();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    glPushMatrix();
+    glRotatef(angle, 0, 0, 1);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, specLight);	// Make sphere glow (emissive)
+    glLightfv(GL_LIGHT0, GL_POSITION, dirI );
+    angle +=1;
+    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, Noemit);
+    glPopMatrix();
     
 	// set camera viewpoint
 	camera_lookat();
@@ -358,18 +386,33 @@ static void display() {
     center[0] = 18.5;
     center[1] = 0.1;
     center[2] = 3.0;
+    glColor3f(1.0, 1.0, 1.0);
     draw_verts(center, 2, false, 0);//draw end 1
     center[0] = -18.5;
     draw_verts(center, 3, false, 0);//draw end 2
     
+    center[0] = 0;
+    center[1] = sphereCenter[1];
+    draw_verts(center, 5, false, 0);//draw bar
     
-//    grid_terrain_draw(num_adj_levels);//draw terrain
     
-    center[0] = -28;
+    grid_terrain_draw(num_adj_levels);//draw terrain
+    
+    glColor3f(0.5, 0.5, 0.5);
+    center[0] = -40;
+    glRotatef(rotation, 0, 1, 0);
     draw_verts(center, 4, false, 0);//draw stands
     glRotatef(90, 0, 1, 0);
     draw_verts(center, 4, false, 0);//draw stands
-
+    glRotatef(90, 0, 1, 0);
+    draw_verts(center, 4, false, 0);
+    glRotatef(90, 0, 1, 0);
+    draw_verts(center, 4, false, 0);
+    
+    center[1] = 15;
+    glColor3f(.4, .4, 1.0);
+    glutSolidSphere(50, 20, 10);
+    
 	glFlush();
     
 	// increment frame count for framerate code
@@ -391,8 +434,21 @@ static void set_lighting() {
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
+//    glEnable(GL_LIGHT1);
 	glEnable(GL_COLOR_MATERIAL);
 	glEnable(GL_NORMALIZE);
+    
+    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalAmbLight);
+    
+    glLightfv(GL_LIGHT0, GL_AMBIENT, ambLight);
+
+    
+}
+
+static void motion(int x, int y) {
+	if(camera_motion(x, y)) {
+		return;
+	}
 }
 
 static void idle() {
@@ -528,12 +584,14 @@ static void init(){
     getNumOfVertsFaces("ends1.obj", 2);
     getNumOfVertsFaces("ends2.obj", 3);
     getNumOfVertsFaces("stands.obj", 4);
+    getNumOfVertsFaces("bar.obj", 5);
     
     parse_obj("sphere.obj", 0);
     parse_obj("arena.obj", 1);
     parse_obj("ends1.obj", 2);
     parse_obj("ends2.obj", 3);
     parse_obj("stands.obj", 4);
+    parse_obj("bar.obj", 5);
     
     //init terrain
     grid_terrain_set_draw_op(GL_TRIANGLES);
@@ -561,6 +619,8 @@ int main(int argc, char* argv[]) {
 	glutKeyboardFunc(keyboard);
 	glutSpecialFunc(special);
 	glutIdleFunc(idle);
+    glutMouseFunc(mouse);
+    glutMotionFunc(motion);
     
 	set_projection();
 	set_lighting();

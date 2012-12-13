@@ -10,6 +10,7 @@
 		AB20633C16792EEF004974B7 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = AB20633A16792EEF004974B7 /* stb_image.c */; };
 		AB20633F16792EF9004974B7 /* imageutil.c in Sources */ = {isa = PBXBuildFile; fileRef = AB20633D16792EF9004974B7 /* imageutil.c */; };
 		AB206341167933F7004974B7 /* texturing.c in Sources */ = {isa = PBXBuildFile; fileRef = AB206340167933F7004974B7 /* texturing.c */; };
+		AB3B1EA8167A77560044B652 /* mouse.c in Sources */ = {isa = PBXBuildFile; fileRef = AB3B1EA6167A77560044B652 /* mouse.c */; };
 		AB58E2591676AD1D00D8D1D3 /* grid_terrain.c in Sources */ = {isa = PBXBuildFile; fileRef = AB58E2571676AD1D00D8D1D3 /* grid_terrain.c */; };
 		AB58E25D1676AD6A00D8D1D3 /* hashmap.c in Sources */ = {isa = PBXBuildFile; fileRef = AB58E25B1676AD6900D8D1D3 /* hashmap.c */; };
 		AB58E2601676AD9100D8D1D3 /* grutil.c in Sources */ = {isa = PBXBuildFile; fileRef = AB58E25E1676AD9100D8D1D3 /* grutil.c */; };
@@ -47,6 +48,8 @@
 		AB206340167933F7004974B7 /* texturing.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = texturing.c; sourceTree = "<group>"; };
 		AB20634616793B47004974B7 /* texturing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = texturing.h; sourceTree = "<group>"; };
 		AB20634716793C6A004974B7 /* sphere.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = sphere.obj; sourceTree = "<group>"; };
+		AB3B1EA6167A77560044B652 /* mouse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mouse.c; sourceTree = "<group>"; };
+		AB3B1EA7167A77560044B652 /* mouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mouse.h; sourceTree = "<group>"; };
 		AB58E2571676AD1D00D8D1D3 /* grid_terrain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = grid_terrain.c; sourceTree = "<group>"; };
 		AB58E2581676AD1D00D8D1D3 /* grid_terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = grid_terrain.h; sourceTree = "<group>"; };
 		AB58E25B1676AD6900D8D1D3 /* hashmap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hashmap.c; sourceTree = "<group>"; };
@@ -208,6 +211,8 @@
 		ABCE669E16767A08002AFD7B /* FinalProject2 */ = {
 			isa = PBXGroup;
 			children = (
+				AB3B1EA6167A77560044B652 /* mouse.c */,
+				AB3B1EA7167A77560044B652 /* mouse.h */,
 				ABCE66B416767B03002AFD7B /* project2.c */,
 				AB20634416793A4C004974B7 /* texturing */,
 				AB20634516793A59004974B7 /* image */,
@@ -290,6 +295,7 @@
 				AB20633C16792EEF004974B7 /* stb_image.c in Sources */,
 				AB20633F16792EF9004974B7 /* imageutil.c in Sources */,
 				AB206341167933F7004974B7 /* texturing.c in Sources */,
+				AB3B1EA8167A77560044B652 /* mouse.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
